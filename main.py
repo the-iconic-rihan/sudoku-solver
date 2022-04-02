@@ -27,5 +27,14 @@ solution1 = [["5", "3", "4", "6", "7", "8", "9", "1", "2"],
 
 if str(len(solution1) == 9 and len(puzzle1) == 9):
     print(True)
+row3 = solution1[3]
+if row3 == ["8", "5", "9", "7", "6", "1", "4", "2", "3"]:
+    print(True)
+value_4_5 = solution1[4][5]
+if value_4_5 == "3":
+    print(True)
+last_row_value = solution1[-1][0]
+if last_row_value == "3":
+    print(True)
 
 # print(len(puzzle1[0]))
