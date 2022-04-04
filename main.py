@@ -18,8 +18,8 @@ def is_valid_move(puzzle, row, col, num):
         if puzzle[x][col] == num:
             return False
 
-    corner_row = row - row % 3
-    corner_col = col - col % 3
+    corner_row = row - (row % 3)
+    corner_col = col - (col % 3)
     for x in range(3):
         for y in range(3):
             if puzzle[corner_row + x][corner_col + y] == num:
