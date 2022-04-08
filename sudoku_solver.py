@@ -1,13 +1,15 @@
-import sys
 from copy import deepcopy
 
-
-def output(a):
-    sys.stdout.write(str(a))
-
+"""
+1. IT has 9 rows
+2. 9 columns
+3. It has 9 elements in every 3x3 block and has 9 block of 3x3.
+4. "." represents the blank 
+5. the number 1-9 must only appear once in every row, columna and even 3x3 block 
+"""
 
 N = 9
-
+# sudoku puzzle
 field = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
          ["6", ".", ".", "1", "9", "5", ".", ".", "."],
          [".", "9", "8", ".", ".", ".", ".", "6", "."],
@@ -18,9 +20,14 @@ field = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
          [".", ".", ".", "4", "1", "9", ".", ".", "5"],
          [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
+"""converting the '.' in to 0 and string numbers into integer type value"""
+
 
 def convert_field(field):
     return [[0 if y == "." else int(y) for y in x] for x in field]
+
+
+"""this function will check for null pointer exception and reconversion to string"""
 
 
 def return_field(field):
@@ -30,7 +37,17 @@ def return_field(field):
     return [[str(y) for y in x] for x in field]
 
 
+"""
+this funtion will copy the puzzle in state variable and will iterate over it 
+if any cell ==0 it will assign the number from 1-10 at that cell
+and return the state
+"""
+
+
 def read(field):
+    """
+
+    """
     state = deepcopy(field)
     for i in range(N):
         for j in range(N):
@@ -39,6 +56,11 @@ def read(field):
                 state[i][j] = set(range(1, 10))
 
     return state
+
+
+"""
+I have use "set" to tell if we have got a unique row and column
+"""
 
 
 def done(state):
@@ -51,7 +73,7 @@ def done(state):
 
 def propagate_step(state):
     new_units = False
-
+    """propaating through the copy puzzle by each row"""
     for i in range(N):
         row = state[i]
         values = set([x for x in row if not isinstance(x, set)])
@@ -79,15 +101,19 @@ def propagate_step(state):
                     new_units = True
                 elif len(state[i][j]) == 0:
                     return False, None
+        """propaating through the copy puzzle by each 3x3 block and remove duplicates using list comprehension"""
 
     for x in range(3):
         for y in range(3):
+            """converting the block to string"""
             values = set()
+            """checking duplicated over row"""
             for i in range(3 * x, 3 * x + 3):
                 for j in range(3 * y, 3 * y + 3):
                     cell = state[i][j]
                     if not isinstance(cell, set):
                         values.add(cell)
+            """checking duplicated over column"""
             for i in range(3 * x, 3 * x + 3):
                 for j in range(3 * y, 3 * y + 3):
                     if isinstance(state[i][j], set):
@@ -103,6 +129,13 @@ def propagate_step(state):
     return True, new_units
 
 
+"""
+The below check the puzzle is solvable or not.
+Steps through subsequent states returned by propagate_step until it reaches final states of either solvable or recurring 
+    unit"
+"""
+
+
 def propagate(state):
     while True:
         solvable, new_unit = propagate_step(state)
@@ -112,15 +145,22 @@ def propagate(state):
             return True
 
 
+"""
+the below function will solve the puzzle by giving a call to propogate function.
+"""
+
+
 def solve(state):
     solvable = propagate(state)
 
     if not solvable:
         return None
-
+    """
+    the puzzle is solve it return state with new values without mutating the original sudoku
+    """
     if done(state):
         return state
-
+    """ Solving the puzzle by making the recursive calls for checking at every blank cell. """
     for i in range(N):
         for j in range(N):
             cell = state[i][j]
@@ -134,4 +174,12 @@ def solve(state):
                 return None
 
 
+"""
+This function makes a call to 
+1.Convert_field(field) -->converting string to integer
+2.Read(convert_field(field)) --> reading the str puzzle and copying it to new list of list
+3.Solve(read(convert_field(field)))--> this will solve the puzzle with help of recursive functions of propogating_step
+    ()function
+4.Return_field(solve(read(convert_field(field))))--> this will return the solved puzzled as a string
+ """
 print(return_field(solve(read(convert_field(field)))))
