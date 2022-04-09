@@ -5,7 +5,7 @@ from copy import deepcopy
 2. 9 columns
 3. It has 9 elements in every 3x3 block and has 9 block of 3x3.
 4. "." represents the blank 
-5. the number 1-9 must only appear once in every row, columna and even 3x3 block 
+5. the number 1-9 must only appear once in every row, column and even 3x3 block 
 """
 
 N = 9
@@ -20,14 +20,14 @@ field = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
          [".", ".", ".", "4", "1", "9", ".", ".", "5"],
          [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
-"""converting the '.' in to 0 and string numbers into integer type value"""
+"""converting the '.' into 0 and string numbers into integer type value"""
 
 
 def convert_field(field):
     return [[0 if y == "." else int(y) for y in x] for x in field]
 
 
-"""this function will check for null pointer exception and reconversion to string"""
+"""this function will check for null pointer exception and reconvert it to string"""
 
 
 def return_field(field):
@@ -38,16 +38,14 @@ def return_field(field):
 
 
 """
-this funtion will copy the puzzle in state variable and will iterate over it 
-if any cell ==0 it will assign the number from 1-10 at that cell
+this function will copy the puzzle in state variable and will iterate over it 
+if any cell == 0 it will assign the number from 1-10 at that cell
 and return the state
 """
 
 
 def read(field):
-    """
 
-    """
     state = deepcopy(field)
     for i in range(N):
         for j in range(N):
@@ -73,7 +71,7 @@ def done(state):
 
 def propagate_step(state):
     new_units = False
-    """propaating through the copy puzzle by each row"""
+    """propagating through the copy puzzle by each row"""
     for i in range(N):
         row = state[i]
         values = set([x for x in row if not isinstance(x, set)])
@@ -101,7 +99,7 @@ def propagate_step(state):
                     new_units = True
                 elif len(state[i][j]) == 0:
                     return False, None
-        """propaating through the copy puzzle by each 3x3 block and remove duplicates using list comprehension"""
+        """propagating through the copy puzzle by each 3x3 block and remove duplicates using list comprehension"""
 
     for x in range(3):
         for y in range(3):

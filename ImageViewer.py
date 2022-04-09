@@ -7,8 +7,11 @@ from PIL import ImageTk, Image
 
 
 def customize_title_bar():
-    # adding customize title bar
-    # customize title bar creation Using a frame and adding some bg color and border none
+    """
+     adding customize title bar
+     customize title bar creation Using a frame and adding some bg color and border none
+    """
+
     title_bar = Frame(root, bg="darkgreen", relief="raised", bd=0, padx=5, pady=5)
     title_bar.pack(side=TOP, expand=1, fill=X)
     # Bind the title bar
