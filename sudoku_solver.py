@@ -45,7 +45,6 @@ and return the state
 
 
 def read(field):
-
     state = deepcopy(field)
     for i in range(N):
         for j in range(N):
