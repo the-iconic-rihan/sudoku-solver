@@ -65,7 +65,8 @@ class ImageViewer:
             side=LEFT)
         f.pack()
 
-    # make_image method is used to open the image of various types
+    """make_image method is used to open the image of various types"""
+
     def make_image(self):
         File = fd.askopenfilename(initialdir=os.getcwd(), title="Select Image file",
                                   filetypes=(("JPG FILE", "*.jpg"), ("PNG FILE", "*.png"),
