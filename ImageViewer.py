@@ -28,7 +28,6 @@ def customize_title_bar():
 
 # to move the gui window
 def move_app(e):
-    # the "e.x_root == 500 and e.y_root == 300"
     root.geometry(f'+{e.x_root}+{e.y_root}')
 
 
@@ -53,7 +52,7 @@ class ImageViewer:
         self.canvas.pack()
         # Adding a starter txt in canvas by using create_text method
         txt = ''' 
-                                                By Rihan Bagwan 
+                                               Add your image here 
                                 '''
         self.wt = self.canvas.create_text(s[0] / 2 - 270, s[1] / 2, text=txt, font=('', 30), fill='white')
         # creating another frame for buttons like open image and close image
@@ -79,14 +78,14 @@ class ImageViewer:
 
 
 root = Tk()
-# removing in-built title bar
+"""removing in-built title bar"""
 root.overrideredirect(True)
-# calling customize title bar
+"""calling customize title bar"""
 customize_title_bar()
 root.configure(bg='white')
 root.title('Image Viewer')
 
-# Object of Class is created
+"""Object of Class is created"""
 img = ImageViewer(root)
 print(img)
 root.resizable(width=True, height=True)
